@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 
 import numpy as np
+import random
 from math import *
 import scipy
 #from sympy import *
@@ -65,12 +66,7 @@ def T3(y,x): # /
 # 2nd coordinate is T_2 == \
 # 3rd coordinate is T_3 == /
 
-def ternary_coord(a : float, b : float ) -> tuple:
-    """ this method converts cartesian coordinates into ternary coordinates 
-    :param a: first cartesian coordinate
-    :param b: second cartesian coordinate
-    :returns: three ternary coordinates
-    """
+def ternary_coord(a,b): # converting cartisian -> ternary coordinates
     t1=b/h
     
     y = sym('y')
@@ -90,7 +86,7 @@ def cartizian(x,y,z): # converting ternary -> cartisian coordinates
 
 # In[3]:
 
-"""
+
 # verification- it works :)
 
 x=random.random()
@@ -98,7 +94,6 @@ y=random.random()
 
 print(cartizian(ternary_coord(x,y)[0],ternary_coord(x,y)[1],ternary_coord(x,y)[2])[0]-x)
 print(cartizian(ternary_coord(x,y)[0],ternary_coord(x,y)[1],ternary_coord(x,y)[2])[1]-y)
-"""
 
 
 # ## Plotting- help functions
@@ -491,7 +486,7 @@ def plot_results(res, granuality):
     return fig
 
 
-# In[10]:
+# In[23]:
 
 
 # plotting the basic two main subtriangles- symmetry analysis basic check,
@@ -565,7 +560,7 @@ def plot_fundemental_asymmetry(data):
     ax.add_patch(pp2)
     ax.add_patch(pp3)
     plt.text(0.1, 0.865, "$D_{lr} =           -1$", size=8)
-    plt.text(0.256, 0.865, '     0', size=8)
+    plt.text(0.256, 0.865, '0', size=8)
     plt.text(0.31, 0.865, '1', size=8)
     # the p-values legend
     #p <= 10**-5
@@ -1002,6 +997,7 @@ def run_analysis(file_name,granuality):
 
 # In[19]:
 
+
 # The intended user interface end- inputting a csv data file.
 # in the csv- assuming first column is T1, second is T2, and third T3 
 # runs a prelimenary baisc asymmetr assesment between the two main subtraingles- seperated by the y axis.
@@ -1016,3 +1012,29 @@ def run_basic_analysis(file):
     print("\ng-test =", main_g_test)
     print("\ng-test- p value=", main_p_value)
     return (main_n_r, main_n_l, main_d_lr,main_g_test, main_p_value)
+
+
+# In[20]:
+
+
+granuality = "coarse"
+res=run_analysis("weights.csv",granuality)
+
+
+# In[21]:
+
+
+res.head()
+
+
+# In[24]:
+
+
+run_basic_analysis("weights.csv")
+
+
+# In[ ]:
+
+
+
+
