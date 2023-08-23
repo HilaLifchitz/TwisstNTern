@@ -7,3 +7,8 @@ omg the info. *ww*: let me show you how i can add stuff now
 
  * number 1
  * number 2
+
+This is binder for you:
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/HilaLifchitz/TwisstNTern/main?labpath=Example.ipynb)
+
