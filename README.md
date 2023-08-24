@@ -1,7 +1,6 @@
 # TwisstNTern
 
-<img src="logo.png" height="340pt" align="bottom">
-omg the info. *ww*: let me show you how i can add stuff now
+<img src="logo.png" height="300pt" align="bottom">
 
 ## A method for analysing topology weights in a ternary framework
 
