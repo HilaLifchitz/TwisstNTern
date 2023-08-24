@@ -89,11 +89,11 @@ def cartizian(x,y,z): # converting ternary -> cartisian coordinates
 
 # verification- it works :)
 
-x=random.random()
-y=random.random()
+#x=random.random()
+#y=random.random()
 
-print(cartizian(ternary_coord(x,y)[0],ternary_coord(x,y)[1],ternary_coord(x,y)[2])[0]-x)
-print(cartizian(ternary_coord(x,y)[0],ternary_coord(x,y)[1],ternary_coord(x,y)[2])[1]-y)
+#print(cartizian(ternary_coord(x,y)[0],ternary_coord(x,y)[1],ternary_coord(x,y)[2])[0]-x)
+#print(cartizian(ternary_coord(x,y)[0],ternary_coord(x,y)[1],ternary_coord(x,y)[2])[1]-y)
 
 
 # ## Plotting- help functions
@@ -1014,23 +1014,10 @@ def run_basic_analysis(file):
     return (main_n_r, main_n_l, main_d_lr,main_g_test, main_p_value)
 
 
-# In[20]:
 
-
-granuality = "coarse"
-res=run_analysis("weights.csv",granuality)
 
 
 # In[21]:
-
-
-res.head()
-
-
-# In[24]:
-
-
-run_basic_analysis("weights.csv")
 
 
 # In[ ]:
