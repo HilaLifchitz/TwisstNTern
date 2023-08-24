@@ -3,6 +3,8 @@
 <img src="logo_new.png" height="140pt" align="bottom">
 omg the info. *ww*: let me show you how i can add stuff now
 
+## A method for analysing topology weights in a ternary framework
+
 ## Lets list what this is about
 
  * mention twisst method- 1,2 sentences
