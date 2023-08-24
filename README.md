@@ -4,6 +4,8 @@
 
 ## A method for analysing topology weights in a ternary framework
 
+sean to write
+
 ## Papers
 Stankowski et al 2023 is where we first used the TwisstNTern method to study patterns of tree discrodnace in _Littorina_ 
 
