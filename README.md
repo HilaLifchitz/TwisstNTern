@@ -17,12 +17,12 @@ There are two ways that you can run TwisstNTern on your data
 1) Download twisstntern.py into your working directory; this should also include your input file of topology weights
 2) Load python
 3) Import the package
-''' 
+```bash
 Import twisstntern
-'''
+```
 4) Execute the code
-'''
+```bash
 res=twisstntern.run_analysis(datafile, granularity)
-'''
+```
 
 
