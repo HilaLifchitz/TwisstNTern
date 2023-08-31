@@ -12,7 +12,8 @@ Stankowski, S., Z. B. Zagrodzka, M. Garlovsky, A. Pal, D. Shipilina, D Garcia Ca
 ## Running TwisstNtern
 There are two ways that you can run TwisstNTern on your data
 
-## From the command line
+Option 1: From the command line
+
 1) Download twisstntern.py into your working directory; this should also include your input file of topology weights
 2) Load python
 3) Import the package
