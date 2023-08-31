@@ -1,5 +1,3 @@
-![image](https://github.com/HilaLifchitz/TwisstNTern/assets/19752114/c94b56a3-0f0c-4440-a40b-c571af527b4a)# TwisstNTern
-
 <img src="logo.png" height="300pt" align="bottom">
 
 ## A method for analysing topology weights in a ternary framework
