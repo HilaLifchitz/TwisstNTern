@@ -8,6 +8,7 @@ TwisstNTern is an analytical framework for visualising and analysing topology we
 ## Papers
 Stankowski et al 2023 is where we first used the TwisstNTern method to study patterns of tree discrodnace in _Littorina_ 
 
+If you use TwisstNTern, please cite:
 Stankowski, S., Z. B. Zagrodzka, M. Garlovsky, A. Pal, D. Shipilina, D Garcia Castillo, T. Broquet, E. Leader, J. Reeve, K. Johannesson, A. M. Westram, R. K. Butlin. 2023. Selection on many loci drove the origin and spread of a key innovation. _bioRxiv_ doi: https://doi.org/10.1101/2023.02.13.528213
 
 ## Running TwisstNtern
