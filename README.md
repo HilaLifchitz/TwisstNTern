@@ -33,18 +33,25 @@ The most appropriate granuliaty for your will depend on the number of genomic re
 The input file is a .csv file consisting of three columns with arbitrary headers. This is produced by Twisst. The ctirical thing for the twisst analysis is that the weights for the species tree toplogy (or topology matches the demographic history) should be in column 1; the other 2 columns represent the 2 alternative subtrees. It does not matter which alternative topology goes in which column, and this can be changed to switch these between the left and right sides of thr ternary plot. 
 
 ```
-Ta Tb Tc
-2850	1650	5500
-0	2000	8000
-582	632	8786
-2800	3200	4000
-2914	2529	4557
-2264	5280	2456
-3592	2192	4216
-700	740	8560
-3936	2568	3496
-2388	5274	2338
-2750	3250	4000
+topo1,topo2,topo3
+2850,1650,5500
+0,2000,8000
+582,632,8786
+2800,3200,4000
+2914,2529,4557
+2264,5280,2456
+3592,2192,4216
+700,740,8560
+3936,2568,3496
+2388,5274,2338
+2750,3250,4000
+0,0,10000
+3776,3446,2778
+5820,780,3400
+3540,5260,1200
+2520,2190,5290
+50,760,9190
+550,600,8850
 ```
 
 
