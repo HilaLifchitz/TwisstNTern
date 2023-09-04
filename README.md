@@ -2,7 +2,8 @@
 
 ## A method for analysing topology weights in a ternary framework
 
-sean to write
+TwisstNTern is an analytical framework for visualising and analysing topology weights in a ternary plot. Please note that TwisstNTern is does not calculate topology weights; abd these must be calculated beforehand using the program Twisst.
+
 
 ## Papers
 Stankowski et al 2023 is where we first used the TwisstNTern method to study patterns of tree discrodnace in _Littorina_ 
