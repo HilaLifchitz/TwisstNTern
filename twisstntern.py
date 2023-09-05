@@ -89,11 +89,11 @@ def cartizian(x,y,z): # converting ternary -> cartisian coordinates
 
 # verification- it works :)
 
-#x=random.random()
-#y=random.random()
+x=random.random()
+y=random.random()
 
-#print(cartizian(ternary_coord(x,y)[0],ternary_coord(x,y)[1],ternary_coord(x,y)[2])[0]-x)
-#print(cartizian(ternary_coord(x,y)[0],ternary_coord(x,y)[1],ternary_coord(x,y)[2])[1]-y)
+print(cartizian(ternary_coord(x,y)[0],ternary_coord(x,y)[1],ternary_coord(x,y)[2])[0]-x)
+print(cartizian(ternary_coord(x,y)[0],ternary_coord(x,y)[1],ternary_coord(x,y)[2])[1]-y)
 
 
 # ## Plotting- help functions
@@ -332,7 +332,7 @@ def plot_results(res, granuality):
 
     # in case the user did not specify a granuality level- means he used one of the default
     alpha = granuality 
-    if granuality == "super fine":
+    if granuality == "superfine":
         alpha = 0.05 # granulity "super fine" was used
     if granuality == "fine":
         alpha = 0.1 # granulity "fine" was used
@@ -340,7 +340,7 @@ def plot_results(res, granuality):
         alpha = 0.25 # granulity "coarse" was used
   
 
-    fig = plt.figure(figsize=(8, 6))
+    fig = plt.figure(figsize=(5, 8))
     ax = plt.axes()
 
     x_side_T2 = np.linspace(0, 0.5, 100)
@@ -486,7 +486,7 @@ def plot_results(res, granuality):
     return fig
 
 
-# In[23]:
+# In[10]:
 
 
 # plotting the basic two main subtriangles- symmetry analysis basic check,
@@ -560,7 +560,7 @@ def plot_fundemental_asymmetry(data):
     ax.add_patch(pp2)
     ax.add_patch(pp3)
     plt.text(0.1, 0.865, "$D_{lr} =           -1$", size=8)
-    plt.text(0.256, 0.865, '0', size=8)
+    plt.text(0.256, 0.865, '     0', size=8)
     plt.text(0.31, 0.865, '1', size=8)
     # the p-values legend
     #p <= 10**-5
@@ -602,7 +602,7 @@ def plotting_triangle_index(res, granuality):
 
     # in case the user did not specify a granuality level- means he used one of the default
     alpha = granuality 
-    if granuality == "super fine":
+    if granuality == "superfine":
         alpha = 0.05 # granulity "super fine" was used
         fig = plt.figure(figsize=(7, 6)) # plot size that fits alpha= 0.05
         font_size = 7
@@ -856,7 +856,7 @@ def log_likelihood_ratio_test(n_r,n_l): ### "n_l centered"!!
 
 def triangles_analysis(data, granularity):
     
-    if granularity == "super fine":
+    if granularity == "superfine":
         alpha=0.05
     elif   granularity == "fine": 
         alpha=0.1
@@ -1014,10 +1014,23 @@ def run_basic_analysis(file):
     return (main_n_r, main_n_l, main_d_lr,main_g_test, main_p_value)
 
 
+# In[20]:
 
+
+granuality = "coarse"
+res=run_analysis("weights.csv",granuality)
 
 
 # In[21]:
+
+
+res.head()
+
+
+# In[22]:
+
+
+run_basic_analysis("weights.csv")
 
 
 # In[ ]:
