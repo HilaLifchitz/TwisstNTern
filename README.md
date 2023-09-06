@@ -15,9 +15,7 @@ If you use TwisstNTern, please cite:
 Stankowski, S., Z. B. Zagrodzka, M. Garlovsky, A. Pal, D. Shipilina, D Garcia Castillo, T. Broquet, E. Leader, J. Reeve, K. Johannesson, A. M. Westram, R. K. Butlin. 2023. Selection on many loci drove the origin and spread of a key innovation. _bioRxiv_ doi: https://doi.org/10.1101/2023.02.13.528213
 
 ## Running TwisstNtern
-At present, TwisstNTern must be exectud within a Jupyter notebook. If you do not currently use Jupyter notebooks, you might want to try installing Anaconda Navigator https://docs.anaconda.com/free/navigator/index.html
-
-Once installed you can use this to the jupyter notebook. 
+At present, TwisstNTern must be exectud within a Jupyter notebook. If you do not currently use Jupyter notebooks, you might want to try installing Anaconda Navigator https://docs.anaconda.com/free/navigator/index.html. Once installed you can use this to lauch the jupyter notebook.
 
 
 **Option 1: From the command line**
