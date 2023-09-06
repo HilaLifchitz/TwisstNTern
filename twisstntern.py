@@ -12,7 +12,7 @@ import numpy as np
 import random
 from math import *
 import scipy
-#from sympy import *
+
 from scipy.stats import binom
 from scipy.stats.distributions import chi2
 import matplotlib.pyplot as plt
@@ -22,8 +22,6 @@ from sympy import Eq, Symbol as sym, solve
 import sys
 
 # presentation in the dataframe
-#pd.options.display.float_format = '{:.4f}'.format
-#pd.set_option("display.precision", 4)
 pd.set_option('display.float_format', '{:.4e}'.format)
 # activating latex printing in matplotlib
 plt.rcParams.update({
@@ -32,6 +30,8 @@ plt.rcParams.update({
 })
 import matplotlib
 matplotlib.rcParams.update(matplotlib.rcParamsDefault)
+
+import sys 
 
 
 # # Preliminaries - Ternary setup
@@ -44,8 +44,8 @@ matplotlib.rcParams.update(matplotlib.rcParamsDefault)
 h = sqrt(3)/2 # = the hight of an equilateral triangle, where each side = 1
 
 
-# Per given coordinate y in [0,1] of Ti, the appropriate 
-#   isoclines in the ternary trianlgle are folrmulated
+# Formulate the appropriate isoclines within the ternary triangle
+# for a given y-coordinate value in the range [0, 1] of Ti
 
 def T1(y,x): # -
     return y*h
@@ -61,12 +61,12 @@ def T3(y,x): # /
     return a*x + b
 
 
-# given a cartizian coordinate in R^2, transform to ternary coordinates
+# Convert a Cartesian coordinate in R^2 to ternary coordinates.
 # 1st coordinate is T_1 == -
 # 2nd coordinate is T_2 == \
 # 3rd coordinate is T_3 == /
 
-def ternary_coord(a,b): # converting cartisian -> ternary coordinates
+def ternary_coord(a,b): # converting Cartisian -> ternary coordinates
     t1=b/h
     
     y = sym('y')
@@ -80,7 +80,7 @@ def ternary_coord(a,b): # converting cartisian -> ternary coordinates
     return (t1,t2,t3)
 
 
-def cartizian(x,y,z): # converting ternary -> cartisian coordinates
+def cartizian(x,y,z): # converting ternary -> Cartisian coordinates
     return ((z-y)/2, x*h)
 
 
@@ -96,14 +96,14 @@ def cartizian(x,y,z): # converting ternary -> cartisian coordinates
 # print(cartizian(ternary_coord(x,y)[0],ternary_coord(x,y)[1],ternary_coord(x,y)[2])[1]-y)
 
 
-# ## Plotting- help functions
+# ## Plotting utility functions
 
 # In[4]:
 
 
-# help functions to plotting
+# Utility functions for plotting.
 
-# returning the linits x points for the correct sketching of Ti(y,.) in our triangle
+# Return the x-axis limits for accurately sketching Ti(y,.) within our triangle.
 
 
 def T1_lim(y): # - given y coordinate of T1, returns the delimeters [x_l,x_r] to plot it in 
@@ -123,9 +123,10 @@ def T1_lim(y): # - given y coordinate of T1, returns the delimeters [x_l,x_r] to
 
 
 #full plot
-def T2_lim(y): # | given y coordinate of T2, returns the delimeters [x_l,x_r] to plot it in 
+def T2_lim(y): # Given the y-coordinate of T2, calculate the delimiters [x_l, x_r] for plotting it within the triangle.
+
     
-    # The general logic:  T3(0,x_left)= T2(y, x_left),  0= T2(y, x_right) should be =1-y-0.5=0.5-y
+    # Logic:  T3(0,x_left)= T2(y, x_left),  0= T2(y, x_right) should be =1-y-0.5=0.5-y
     
     x_l = sym('x_l') # x_left
     eqa_l = Eq(T3(0,x_l),T2(y, x_l))
@@ -138,9 +139,9 @@ def T2_lim(y): # | given y coordinate of T2, returns the delimeters [x_l,x_r] to
 
     
 #full plot
-def T3_lim(y): # / given y coordinate of T3, returns the delimeters [x_l,x_r] to plot it in 
+def T3_lim(y): # Given the y-coordinate of T3, calculate the delimiters [x_l, x_r] for plotting it within the triangle.
     
-    # The general logic:   0= T3(y, x_left) should be = y-0.5 ,  T3(y,x_right)= T2(0, x_right)  
+    # Logic:   0= T3(y, x_left) should be = y-0.5 ,  T3(y,x_right)= T2(0, x_right)  
    
     x_l = sym('x_l') # x_left
     eqa_l = Eq(T3(y,x_l),0)
@@ -151,10 +152,12 @@ def T3_lim(y): # / given y coordinate of T3, returns the delimeters [x_l,x_r] to
     x_R = float(solve(eqa_r,x_r)[0])
     return (x_L,x_R)
 
-# plotting only the right half
-def T3_lim_symm(y): # | given y coordinate of T2, returns the delimeters [x_l,x_r] to plot it in, for the 
+# plotting only the right half- for the results plot
+def T3_lim_symm(y): # Given the y-coordinate of T3, calculate the delimiters [x_l, x_r] for plotting it within 
+                    # right half of the triangle.
+
     
-    # The general logic:  T3(0,x_left)= T2(y, x_left),  0= T2(y, x_right) should be =1-y-0.5=0.5-y
+    # Logic:  T3(0,x_left)= T2(y, x_left),  0= T2(y, x_right) should be =1-y-0.5=0.5-y
    
     x_l = sym('x_l') # x_left
     eqa_l = Eq(T3(y,x_l),0)
@@ -171,8 +174,11 @@ def T3_lim_symm(y): # | given y coordinate of T2, returns the delimeters [x_l,x_
 # In[5]:
 
 
-def return_triangle_coord(a1,b1,a2,b2,a3,b3): # input coordiante of subtriangle, return two arrays in cartisian 
-    # coordinates, and direction of triangle "up"/"down" as string.
+# Given the coordinates of a subtriangle, returns two arrays in Cartesian coordinates,
+# along with the triangle orientation as a string ("up" or "down").
+
+def return_triangle_coord(a1,b1,a2,b2,a3,b3): 
+    
     x_s = sym('x_s') # s- spitz node
     x_l = sym('x_l') # l- left node
     x_r = sym('x_r') # r- right node
@@ -183,9 +189,10 @@ def return_triangle_coord(a1,b1,a2,b2,a3,b3): # input coordiante of subtriangle,
     eqa_l = Eq(T2(b2, x_l) ,T3(a3,x_l))   # true for both up & down triangles
     x_l = float(solve(eqa_l,x_l)[0])
     
-  # write a condition to detect direction
-  # a triangle is an up-triangle if and only if the y component e.g. T2(b2, x_l)
-    # of any of the base nodes is intersecting b1/h (the "higher" T1 coordinate)
+ 
+    # A triangle is classified as an "up-triangle" if and only if the y-component, such as T2(b2, x_l),
+    # of any of the base nodes intersects with b1/h, which represents the higher T1 coordinate.
+
     if abs(T2(b2,x_l)-a1*h) <= 10**-14: # T2(b2,x_l) == (a1*h)  
         direction = "up"  # think later if we want to store this as strings really, maybe not for some condition later-on
         
@@ -205,7 +212,7 @@ def return_triangle_coord(a1,b1,a2,b2,a3,b3): # input coordiante of subtriangle,
 
     
     trianglex = [ x_l, x_s ,x_r , x_l ] 
-    return (trianglex, triangley, direction) # ready to be printed with: plt.fill(trianglex, triangley)
+    return (trianglex, triangley, direction) # this format is ready to be printed with: plt.fill(trianglex, triangley)
 
 
 # In[6]:
@@ -219,8 +226,8 @@ def ref(a1,b1,a2,b2,a3,b3):
 # In[7]:
 
 
-# lets make a data structure that has the coordinate of a right triangle, the cartesian location of its node and mid-point
-# for the plotting of the p-value results in the sub-triangles
+# Given the coordinates of a (right) subtriangle, determine the midpoint's location
+# to be utilized for plotting the p-value results within the sub-triangles.
 
 def mid_point_triangle(a1,b1,a2,b2,a3,b3): # in cartesian coordinates
     trianglex, triangley, direction=return_triangle_coord(a1,b1,a2,b2,a3,b3)
@@ -239,7 +246,8 @@ def mid_point_triangle(a1,b1,a2,b2,a3,b3): # in cartesian coordinates
 # In[8]:
 
 
-def plot(data, alpha,file_name): # rudimental plotting
+def plot(data, alpha,file_name): # Initial plotting of data-points in ternary coordinates
+
     fig = plt.figure(figsize=(8, 6))
     ax = plt.axes()
 
@@ -249,6 +257,7 @@ def plot(data, alpha,file_name): # rudimental plotting
     ax.plot(x_side_T2, T2(0,x_side_T2),"k",linewidth=1);
     ax.plot(x_side_T3, T3(0,x_side_T3),"k",linewidth=1);
     plt.hlines(y = 0, xmin =-0.5, xmax = 0.5,color="k",linewidth=1)
+    
     # Hide X and Y axes tick marks
     ax.set_xticks([])
     ax.set_yticks([])
@@ -274,7 +283,7 @@ def plot(data, alpha,file_name): # rudimental plotting
     x_data = cartizian(data["T1"],data["T2"],data["T3"])[0] # x coordinates of the data points to be plotted
     y_data = cartizian(data["T1"],data["T2"],data["T3"])[1] # y coordinates of the data points to be plotted
     
-    plt.scatter(x_data,y_data, color = "lightsteelblue",alpha=0.4,s=9)
+    plt.scatter(x_data,y_data, color = "lightsteelblue",alpha=0.5,s=9)
 #     plt.scatter(x_data,y_data, color = "blue",alpha=1,s=15)
     
     plt.text(-0.02, 0.88, 'T1', size=12, color="crimson")
@@ -309,12 +318,13 @@ def plot(data, alpha,file_name): # rudimental plotting
         x=T_3[i]
         plt.text(x, -0.03, label , size=7, color = "darkgoldenrod")   
         
-      # removing the box lines around the plot
+    # removing the box lines around the plot
     ax.spines['right'].set_color('none')
     ax.spines['left'].set_color('none')
     ax.spines['bottom'].set_color('none')
     ax.spines['top'].set_color('none')
      
+    #saving the plot
     title = file_name + "_granuality_" + str(alpha)  +".png"  
     plt.savefig(title)
     return fig
@@ -325,13 +335,14 @@ def plot(data, alpha,file_name): # rudimental plotting
 # In[9]:
 
 
-# plotting the analysis, input is res= results dataframe, which is the output of triangles_analysis
-# (data, granularity). Also the granuality needs to be inserted as a string.
-# In case a non-orthodox choice was used, then the different granuality need to be specified as a float
+# Generates a plot of the analysis results using the 'res' DataFrame, which is the output of 
+# 'triangles_analysis(data, granularity)'. 
+# The granularity should be provided as one of the strings; "course", "fine" or "superfine".
+# If a non-standard choice was used, specify the different granularity as a float.
 
 def plot_results(res, granuality, file_name):
 
-    # in case the user did not specify a granuality level- means he used one of the default
+    # If the user didn't specify a granularity level, it implies they used one of the default settings.
     alpha = granuality 
     if granuality == "superfine":
         alpha = 0.05 # granulity "super fine" was used
@@ -355,7 +366,6 @@ def plot_results(res, granuality, file_name):
 
 
     # coordinates!
-    #for i in range(1, int(1/alpha)):
 
     # ploting T2 coordinates
     for i in range(1,int(1/(2*alpha))):
@@ -381,9 +391,9 @@ def plot_results(res, granuality, file_name):
     # single vline with full ymin and ymax
     plt.vlines(x=0, ymin=0, ymax=h, colors="grey", ls=':')
 
-    p_plt=[] # a list of the mid -points of the subtraingles, to plot the p-values via scatter function
+    #p_plt=[] # a list of the mid -points of the subtraingles, to plot the p-values via scatter function
 
-    for i in range(res["D-LR"].size): # going through all right sub-triangles
+    for i in range(res["D-LR"].size): # going through all the right sub-triangles
 
         a1=res["coord. (T1, T2, T3)"][i][0][0]
         b1=res["coord. (T1, T2, T3)"][i][0][1]
@@ -401,11 +411,11 @@ def plot_results(res, granuality, file_name):
             plt.fill(trianglex, triangley,color="black")
 
         else:  
-            d_lr_color_score = (res["D-LR"][i] + 1 )/2 # normalzing to get a score between [0,1]
-            # , color according to the d_lr result
+            # Normalizing to obtain a score within the [0, 1] range for color-coding based on the d_lr result.
+            d_lr_color_score = (res["D-LR"][i] + 1 )/2 
             plt.fill(trianglex, triangley,color=(d_lr_color_score, 1-d_lr_color_score, 1-d_lr_color_score))
 
-            # sketching points that indicate significant p-values in the relevent subtriangles
+            # Plotting points that represent statistically significant p-values within the relevant subtriangles.
             x,y = mid_point_triangle(a1,b1,a2,b2,a3,b3)
             p=res["p-value(g-test)"][i]
             if p < 0.05 and p >= 0.001 :
@@ -418,7 +428,8 @@ def plot_results(res, granuality, file_name):
 
 
     # creating the legends
-    # colors of the sub-triangles
+    
+    # colors scheme of the sub-triangles
     d_lr_color_score = 0
     pp1 = plt.Rectangle((0.2, 0.85), 0.05, 0.05, color=(d_lr_color_score, 1-d_lr_color_score, 1-d_lr_color_score)) # d_lr_color_score = 0
     d_lr_color_score = 0.5
@@ -494,8 +505,9 @@ def plot_results(res, granuality, file_name):
 # In[10]:
 
 
-# plotting the basic two main subtriangles- symmetry analysis basic check,
-#saves the analysis plot and returns (d_lr, g_test,_p_value) of the comparison
+# Plotting the fundamental two main subtriangles for symmetry analysis,
+# saving the analysis plot, and returning the results (d_lr, g_test, _p_value) of the comparison.
+
 def plot_fundemental_asymmetry(data, file_name):
     fig = plt.figure(figsize=(6, 4))
     ax = plt.axes()
@@ -506,10 +518,10 @@ def plot_fundemental_asymmetry(data, file_name):
     ax.plot(x_side_T2, T2(0,x_side_T2),"k",linewidth=1);
     ax.plot(x_side_T3, T3(0,x_side_T3),"k",linewidth=1);
     plt.hlines(y = 0, xmin =-0.5, xmax = 0.5,color="k",linewidth=1)
+    
     # Hide X and Y axes tick marks
     ax.set_xticks([])
     ax.set_yticks([])
-
 
     # single vline with full ymin and ymax
     plt.vlines(x=0, ymin=0, ymax=h, colors="black")
@@ -531,7 +543,7 @@ def plot_fundemental_asymmetry(data, file_name):
     d_lr_color_score_R = (main_d_lr + 1 )/2 # normalzing to get a score between [0,1]
     d_lr_color_score_L = (main_d_lr_left + 1 )/2 # normalzing to get a score between [0,1]
 
-    # FILLING THE SUBTRINAGLES color according to the d_lr result
+    # Filling the subtriangles color according to the d_lr result
     plt.fill(trianglex_R, triangley_R,color=(d_lr_color_score_R, 1-d_lr_color_score_R, 1-d_lr_color_score_R))
     plt.fill(trianglex_L, triangley_L,color=(d_lr_color_score_L, 1-d_lr_color_score_L, 1-d_lr_color_score_L))
 
@@ -547,12 +559,6 @@ def plot_fundemental_asymmetry(data, file_name):
         ax.scatter(x,y,color="black", marker="*", alpha = 1, s =25)
 
 
-
-    # # the p-values starts
-    # p_plot = pd.DataFrame(p_plt)
-    # p_plot.columns=["x","y","p"]
-    # ax.scatter(p_plot["x"], p_plot["y"],color="midnightblue", marker="*", alpha = 1-p_plot["p"], s =24*(1-p_plot["p"]))
-
     # creating the legends
     # colors of the sub-triangles
     d_lr_color_score = 0
@@ -567,6 +573,7 @@ def plot_fundemental_asymmetry(data, file_name):
     plt.text(0.135, 0.865, "$D_{lr} =-1$", size=7)
     plt.text(0.26, 0.865, '0', size=7)
     plt.text(0.31, 0.865, '1', size=7)
+    
     # the p-values legend
     #p <= 10**-5
     ax.scatter(0.2, 0.8,color="black", marker="*", alpha = 1, s =25)
@@ -593,7 +600,7 @@ def plot_fundemental_asymmetry(data, file_name):
     ax.spines['bottom'].set_color('none')
     ax.spines['top'].set_color('none')
 
-
+    #saving figure
     title = file_name + "_fundamental_asymmetry.png"  
     plt.savefig(title)
     return (main_d_lr,main_g_test, main_p_value)
@@ -602,13 +609,15 @@ def plot_fundemental_asymmetry(data, file_name):
 # In[11]:
 
 
-# plotting the index plot- numbering of triangles
+# Generating an index plot with distinct numbers assigned to each subtriangle for clear visualization.
+# These numbers will correspond to the indices in the result file.
+
 def plotting_triangle_index(res, granuality):
 
-    # in case the user did not specify a granuality level- means he used one of the default
+    # If the user didn't specify a granularity level, it implies they used one of the default settings.
     alpha = granuality 
     if granuality == "superfine":
-        alpha = 0.05 # granulity "super fine" was used
+        alpha = 0.05 # granulity "superfine" was used
         fig = plt.figure(figsize=(7, 6)) # plot size that fits alpha= 0.05
         font_size = 7
     if granuality == "fine":
@@ -633,7 +642,6 @@ def plotting_triangle_index(res, granuality):
 
 
     # coordinates!
-    #for i in range(1, int(1/alpha)):
 
     # ploting T2 coordinates
     for i in range(1,int(1/(2*alpha))):
@@ -658,7 +666,6 @@ def plotting_triangle_index(res, granuality):
     # single vline with full ymin and ymax
     plt.vlines(x=0, ymin=0, ymax=h, colors="grey", ls=':')
 
-    p_plt=[] # a list of the mid -points of the subtraingles, to plot the p-values via scatter function
 
     N=number_triangles(alpha)
     for i in range(res["D-LR"].size): # going through all right sub-triangles
@@ -715,6 +722,7 @@ def plotting_triangle_index(res, granuality):
     ax.spines['bottom'].set_color('none')
     ax.spines['top'].set_color('none')
 
+    # saving figure
     title = "index_granulality_" + str(alpha)  +".png"  
     plt.savefig(title)
     return fig
@@ -725,17 +733,16 @@ def plotting_triangle_index(res, granuality):
 # In[12]:
 
 
-# Basic symmetry- between the two main subtraingles- the i.e. the subtriangles divided by the y-axis
-# a new column with the x-axis of each point- a point is in the righ subtriangle if and only if the x-coordinate >0
-# (in the pre-processiong opints on the y-axis were eliminated from the data)
-
+# Implementing basic symmetry analysis between the two primary subtriangles, i.e., those divided by the y-axis.
+# A new column containing the x-axis values of each point is created.
+# A point is considered to be in the right subtriangle if and only if its x-coordinate is strictly greater than 0.
+# (Note that points on the y-axis were eliminated during preprocessing.)
 
 def fundemental_asymmetry(data):
     data["x-axis"]= cartizian(data["T1"],data["T2"],data["T3"])[0] 
     main_n_r = len(data[data["x-axis"]>0])
     main_n_l = len(data[data["x-axis"]<0])
-    # check
-    # main_n_l+main_n_r == len(data["x-axis"])
+
     main_d_lr=D_LR(main_n_r,main_n_l)
     main_g_test, main_p_value= log_likelihood_ratio_test(main_n_r,main_n_l)
     return (main_n_r, main_n_l, main_d_lr,main_g_test, main_p_value)
@@ -744,14 +751,17 @@ def fundemental_asymmetry(data):
 # In[13]:
 
 
-# given a coordinate for a legitimate subtraingle (right or left)- returns the number of data points within the
-# triangle and its reflected triangle. Regardles wether the coordinates were goven to left or right-subtriangle, 
-# it returns (n_r,n_l) for the correct directions.
+# Given coordinates for a valid subtriangle (either right or left), determine the number of data points within the
+# triangle and its corresponding reflected triangle. Regardless of whether the coordinates were provided for the left
+# or right subtriangle, it returns (n_r, n_l) for the respective directions.
 
-def n(a1,b1,a2,b2,a3,b3, data): # ai = smaller interval point in coordinates of T_i, b_i larger analogically
+#The input coordinates ai < bi signifies the interval point in the coordinates of T_i, i=1,2,3
+
+def n(a1,b1,a2,b2,a3,b3, data): 
     
-    # this extra bit is to prevent data being counted twice. The coordinates divide [0,1] to a sum half open intervals 
-    # (i*alpha, (i+1)*alpha], but the very firt one is closed [0, 1*alpha].
+    # This additional logic is implemented to avoid double-counting of data. The coordinates divide the range [0, 1]
+    # into a series of half-open intervals of the form (i * alpha, (i + 1) * alpha], 
+    # but the very first interval is closed, covering the range [0, 1 * alpha].
     if a1 == 0:
         condition_a1 = a1<=data.T1
     else   : 
@@ -778,8 +788,10 @@ def n(a1,b1,a2,b2,a3,b3, data): # ai = smaller interval point in coordinates of 
             ((a2<=data.T3) & (data.T3<=b2))])
     
     # checking which triangle is left in which is right
-    # the check is wether x-axis component the top of subtriangle is positive or negative in cartisian coordinates
-    # the top_node is positive in the x-axis if and only if it is the right-hand side triangle 
+    
+    # The check involves determining whether the x-axis component of the top node of a subtriangle is positive or negative
+    # in Cartesian coordinates. The top node is positive along the x-axis if and only if it belongs to the right-hand side triangle.
+
     trianglex, triangley, direction = return_triangle_coord(a1,b1,a2,b2,a3,b3)
     top_node = trianglex[1] # this is the x_axis coordinate of the top node in the given triangle 
     
@@ -795,13 +807,16 @@ def n(a1,b1,a2,b2,a3,b3, data): # ai = smaller interval point in coordinates of 
 
 
 
-# the HEART- D_LR 
-def D_LR(n_r,n_l):# d_lr between n_l := # in a left trianlge, n_r = # in the appropriate right triangle
+# the D_LR comparison 
+# Calculate the d_lr value, where n_l represents the number of points in a left triangle, 
+# and n_r represents the number of points in the corresponding right triangle.
+
+def D_LR(n_r,n_l):
     
     if n_l+n_r != 0 : # finally the test
-        d_lr = (n_r-0.5*(n_l+n_r))/(0.5*(n_l+n_r)) #### CHANGED n_l --> n_r!!!!!!!!!!!!!!!!!!! 21.8.23
-    else: # the case we would have divided by 0- if both triangles empty we give a g-score := 0
-        d_lr = np.nan
+        d_lr = (n_r-0.5*(n_l+n_r))/(0.5*(n_l+n_r)) 
+    else: # the case we would have divided by 0
+        d_lr = np.nan # in this case we return a NaN value
         
     return d_lr
 
@@ -809,31 +824,36 @@ def D_LR(n_r,n_l):# d_lr between n_l := # in a left trianlge, n_r = # in the app
 # In[14]:
 
 
-# lets calculate how many triangles we need to compare per given granulaity
-# we call arow a coordinate line of T1, so bottem line is T1(0), and the next row is T1(1*alpha) 
-#  until (T1(1/alpha-1) * alpha)
+# Determine the required number of triangles to compare for a given granularity.
+# We define a "row" as a coordinate line of T1, where the bottom line is represented by T1(0),
+# and each subsequent row is incremented by T1(1 * alpha) until we reach T1(1 / alpha - 1) * alpha.
 
-# our choice of alpha will always be such that the y axis going through 0 will not cross a trianle- i.e 1/alpha is even.
-# meaning that in the bottom row, the number of up-triangles (the basis || x-axis is down ) = 0.5 * (1/alpha)
-# then go over row by row counting all the "up traingles" and all the "down triangles".
+# Our choice of alpha is designed to ensure that the y-axis, passing through 0, does not intersect any triangle.
+# Specifically, we select an alpha value such that 1/alpha is an even number.
+# Consequently, in the bottom row, the count of "up-triangles" (where the base is parallel to the x-axis and facing downward)
+# is equal to 0.5 * (1/alpha).
+# We then systematically traverse row by row, tallying both "up triangles" and "down triangles."
 
 
-# given a granuality level we claculate how many triangles we need to examine
+# Given a granularity level, we determine the number of triangles that require examination.
 def number_triangles(alpha): 
     
     if  int(1/alpha) % 2:
         print(" 1/alpha is odd")
         sys.exit() 
-    # explenation:
-    # first row we have 1/(2 alpha) up_triangles and from then two rows of (1/2alpha -i), for i = 1 until this expression
-    # (1/2alpha -i) == 1. we then solve for i == (1-2*alpha)/2*alpha := a    
-
+    
+    # Explanation:
+    # In the first row, there are 1/(2 * alpha) up triangles, and then for each subsequent row, we have two fewer up triangles,
+    # where the count decreases according to the expression (1/(2 * alpha) - i), for i = 1 until (1/(2 * alpha) - i) == 1.
+    # To find the value of i where (1/(2 * alpha) - i) == 1, we solve for i using the equation i == (1 - 2 * alpha) / (2 * alpha),
+    # which can be represented as 'a'.
+  
     a = int((1-2*alpha)/(2*alpha))
     n = int(1/(2*alpha)) # n=# triangles. initiation is of  up-triangles in row 0 - bottom of the triangle
     for i in range(1,a+1):
-        n = n + 4*int((1/(2*alpha))-i) # untill the top of the triangles, we have dowble rows of "diamods"- 
-        # which we dub a union of an bottom and up triangle sharing the same base. since we have doble rows all in all
-        # we multiply by 4
+        # Up to the top of the triangles, there are double rows of "diamonds," which we define as a combination of a bottom triangle
+        # and an up triangle sharing the same base. Since we have double rows in total, we multiply this count by 4.
+        n = n + 4*int((1/(2*alpha))-i) 
 
     return n
 
@@ -841,13 +861,18 @@ def number_triangles(alpha):
 # In[15]:
 
 
-# return -2* log(likelihood(n_l))/log(likelihood(symmetric)), under the binomial
-def log_likelihood_ratio_test(n_r,n_l): ### "n_l centered"!!
+# returns -2* log(likelihood(n_l))/log(likelihood(symmetric)), under the binomial
+def log_likelihood_ratio_test(n_r,n_l): 
    N= n_r +n_l
    if N != 0: # the non-pathalogical case        
-       L_null = binom.pmf(n_l,N , 0.5) # likelihood that from N trials (with p=0.5 we lan in n_l, 0.5 in n_r) we landed n_l times in the left triangle
-       L_alt = binom.pmf(n_l,N , n_l/N) #  This alternative hypothesis is that the true proportion of n_l s is exactly
-       # equal to what you observed in the experiment
+      
+       # Calculating the likelihood of landing 'n_l' times in the left triangle out of 'N' trials, each with a probability of 0.5
+       # to land in either 'n_l' or 'n_r'.
+       L_null = binom.pmf(n_l,N , 0.5) 
+       
+       # The alternative hypothesis posits that the actual proportion of 'n_l' occurrences is precisely
+       # equal to the observed proportion in the experiment.
+       L_alt = binom.pmf(n_l,N , n_l/N) 
 
        if L_null/L_alt < 10**-16: # this means sth extremely unlikely has occured
            test_res= np.nan
@@ -865,8 +890,8 @@ def log_likelihood_ratio_test(n_r,n_l): ### "n_l centered"!!
 # In[16]:
 
 
-# to make the copmarison we go row by row (according to T1(alpha,.) coordinates), and count the up-triangles 
-# and then the down-triangles
+# To perform the comparison, we iterate row by row, following the T1(alpha,.) coordinates,
+# and tally the count of up-triangles followed by down-triangles in each row.
 
 def triangles_analysis(data, granularity, file_name):
     
@@ -904,8 +929,6 @@ def triangles_analysis(data, granularity, file_name):
 
             trianglex,triangley,direction =  return_triangle_coord(a1,b1,a2,b2,a3,b3)
             if round(trianglex[0],4)< 0:
-          #      print(a1,b1,a2,b2,a3,b3)
-         #       print(trianglex[0])
                 continue
 
 
@@ -914,8 +937,6 @@ def triangles_analysis(data, granularity, file_name):
             g_test, p_value= log_likelihood_ratio_test(n_r,n_l)
 
             coord= [(round(a1,4),round(b1,4)),(round(a2,4),round(b2,4)),(round(a3,4),round(b3,4))] #coord= [(a1,b1),(a2,b2),(a3,b3)], for some reason needed, else python gives 0.x9999999
-
-            #tri.append([coord,n_r,n_l, d_lr, g_test, p_value, trianglex,triangley,direction])
             tri.append([coord,n_r,n_l, d_lr, g_test, p_value])
 
 
@@ -930,7 +951,6 @@ def triangles_analysis(data, granularity, file_name):
 
             trianglex,triangley,direction =  return_triangle_coord(a1,b1,a2,b2,a3,b3)
             if round(trianglex[0],4)< 0:
-                #print(a1,b1,a2,b2,a3,b3)
                 continue
 
 
@@ -939,7 +959,6 @@ def triangles_analysis(data, granularity, file_name):
             g_test, p_value= log_likelihood_ratio_test(n_r,n_l)
 
             coord= [(round(a1,4),round(b1,4)),(round(a2,4),round(b2,4)),(round(a3,4),round(b3,4))]
-            #tri.append([coord,n_r,n_l, d_lr, g_test, p_value, trianglex,triangley,direction])
             tri.append([coord,n_r,n_l, d_lr, g_test, p_value])
 
 
@@ -947,10 +966,9 @@ def triangles_analysis(data, granularity, file_name):
 
     #saving the list as a dataframe
     triangles = pd.DataFrame(tri)
-    #triangles.columns=["coord.","n_right","n_left","D_LR", "g_test", "p_value-g-test","trianglex","triangley","direction"]
     triangles.columns=["coord. (T1, T2, T3)","n_right","n_left","D-LR", "g-test", "p-value(g-test)"]
     index= list(range(number_triangles(alpha), 0, -1)) # indexing the triangles
-    triangles["index"]=index
+    triangles["index"]=index # the index is fitting the index-plot
     
     return triangles
 
@@ -960,22 +978,24 @@ def triangles_analysis(data, granularity, file_name):
 # In[17]:
 
 
-# input a csv data file, assuming first column is T1, second is T2, and third T3 
-# erasing points on the y-axis, as they might be counted both left/right subtriangle
+# Accept a CSV data file as input, assuming that the first column represents T1 coordinates, 
+# the second column represents T2 coordinates, and the third column represents T3 coordinates. 
+# We filter out points located on the y-axis, as they may contribute to both the left and right subtriangles.
+
 def dump_data(file):
-   data = pd.read_csv(file)
-   data.columns = ['T1','T2','T3'] # renaming columns accrding to our convention
-   # we should centralize the rows, in case it didnt come already centralized
-   # each row
+    data = pd.read_csv(file)
+    data.columns = ['T1','T2','T3']# Reassigning column names according to our established naming convention.
+
+    
+    # We normalize the rows, as a precaution, in case they were not already normalized.
+    n_rows=data.shape[0]
+    for i in range(n_rows):
+        s= sum(data.iloc[i,:])
+        data.iloc[i,:] =  (data.iloc[i,:])/s
+    
+    data=data.loc[data.iloc[:,1] != data.iloc[:,2] ] 
    
-   n_rows=data.shape[0]
-   for i in range(n_rows):
-       s= sum(data.iloc[i,:])
-       data.iloc[i,:] =  (data.iloc[i,:])/s
-   
-   data=data.loc[data.iloc[:,1] != data.iloc[:,2] ] 
-  
-   return data
+    return data
 
 
 # # User Interface
@@ -983,16 +1003,19 @@ def dump_data(file):
 # In[18]:
 
 
-# The intended user interface end- inputting a csv data file,and desired granuality level.
-# in the csv- assuming first column is T1, second is T2, and third T3 
-# as granuality level astring with oprions "coarse", "fine" or "super fine", corresponding to 
-# ternary coordinate granuality of 0.25, 0.1 and 0.05 respectfully.
+# The main function- runs the anlysis
+# 
+# Input
+# 1. file: Ensure the input file is a CSV file containing precisely three columns. Assume the first column represents T1, the second represents T2, and the third represents T3.
+# 2. granuality: Specify the desired granularity by choosing one of the following options: "coarse", "fine", or "superfine". Keep in mind that "coarse" corresponds to a granularity of 0.25, "fine" to 0.1, and "superfine" to 0.05.
 
-# The code runs the analysis --- ELABORATE, SEAN-- 
-# It then opens a new "Results" dirctory an in it saves 3 plots and a csv file with the anlysis results.
-# The plots consists one- basic- 2 main subtraingle asymmetry test, a plot of the data in a ternary coordiante
-# a plot analysis results.
-# The final results is both outputed as a pandas data.frame as well as saves it as a csv file in the "Results" directory.
+# Output : The program will generate a Results file comprising the following components:
+# 1. CSV Results Table: This file will contain the results in CSV format.
+# 2. Subtriangles Index Plot: An index plot with distinct numbers assigned to each subtriangle for clear visualization. These numbers correspond to the indices in the result file.
+# 3. Ternary Coordinates Plot: A plot of the data in ternary coordinates.
+# 4. Results Summary Plot: A plot displaying the results with D_lr results together with significant G-test scoring.
+# 5. Basic Asymmetry Plot: A plot showcasing the basic asymmetry between the left and right halves of the triangle.
+
 
 def run_analysis(file,granuality): 
     # creating and redirecting to a Results folder
@@ -1004,8 +1027,17 @@ def run_analysis(file,granuality):
         os.mkdir(path) # creating the directory (realizing the path)
     os.chdir(desired_directory) # we move to the new directory
 
-    # data anlysis
-    data= dump_data(original_path+"/"+file) # data processing, data is at precious directory   
+    # data upload/initial processing
+    data= dump_data(original_path+"/"+file) # data processing, data is at precious directory  
+    
+    # to deal with pathological cases of an empty data-set
+    if data.size == 0:
+        print("Dataset is incompatible")
+        print("Perform a validation check to determine whether the uploaded data is either empty or "+ 
+               "exclusively consists of points located on the reflection axis")
+        sys.exit()
+        
+        
     file_name = file[:len(file) - 4] # getting rid of ".csv" in the file's name
     #plotting data
     basic_plot=plot_fundemental_asymmetry(data,file_name)
@@ -1034,14 +1066,22 @@ def run_analysis(file,granuality):
 # In[19]:
 
 
-# The intended user interface end- inputting a csv data file.
-# in the csv- assuming first column is T1, second is T2, and third T3 
-# runs a prelimenary baisc asymmetr assesment between the two main subtraingles- seperated by the y axis.
-# return all number of data points in each triangle, d_lr result, g test and its p-value.
-# also saves a figure where the result are plotted
+# Conducts an initial assessment of basic asymmetry between the two primary subtriangles, divided by the y-axis.
+# Returns the counts of data points in each triangle, the d_lr result, the G-test statistic, and its associated p-value.
+# Additionally, it saves a figure illustrating the results.
+
+# Input
+# file: Ensure the input file is a CSV file containing precisely three columns. Assume the first column represents T1, the second represents T2, and the third represents T3.
+
 
 def run_basic_analysis(file):    
     data= dump_data(file) # data processing
+    if data.size == 0:
+        print("Dataset is incompatible")
+        print("Perform a validation check to determine whether the uploaded data is either empty or "+ 
+               "exclusively consists of points located on the reflection axis")
+        sys.exit()
+        
     (main_n_r, main_n_l, main_d_lr,main_g_test, main_p_value)=fundemental_asymmetry(data)
     
     file_name = file[:len(file) - 4] # getting rid of ".csv" in the file's name
