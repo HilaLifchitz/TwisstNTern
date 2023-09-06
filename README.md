@@ -16,6 +16,7 @@ Stankowski, S., Z. B. Zagrodzka, M. Garlovsky, A. Pal, D. Shipilina, D Garcia Ca
 
 ## Running TwisstNtern
 At present, TwisstNTern must be exectud within a Jupyter notebook. If you do not currently use Jupyter notebooks, you might want to try installing Anaconda Navigator https://docs.anaconda.com/free/navigator/index.html
+
 Once installed you can use this to the jupyter notebook. 
 
 
