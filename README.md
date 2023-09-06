@@ -24,7 +24,7 @@ Assuming that you already know how to execute a Jupyter notebook, you can follow
 3) In cell 2, change `file` so it matches the name of your input file, and set `granularity` to the desired resolution (see Granularity section below). `granularity` determines the number of subtriangles used in the local symmetry analysis. We provided 3 preset options `coarse`, `fine`, and `superfine`. See below for more information. 
 <img src="step3.png" height="" align="bottom">
 4) Press the double arrow button to restart the kernal and run all cells.
-<img src="step4.png" height="50pt" align="bottom">
+<img src="step4.png" height="25pt" align="bottom">
 
 
 
