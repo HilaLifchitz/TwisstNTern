@@ -29,24 +29,8 @@ Assuming that you already know how to execute a Jupyter notebook, you can follow
 **Choosing the most appropriate granularity**
 The most appropriate granuliaty for your dataset will depend on the number of genomic regions analysed and the dispersion of the data aross the ternary plot. For most WGS studies where the genome has been sectioned into block of arbitrarty size or SNP number, the `fine` option is a good place to start. Emerging tools like the ARG can produce very large numbers of marginal trees, so the `superfine` options may be suitable. Studies with reduced representation datasets may have fewer loci than the average WGS study, so `coarse` may be a more apporpriate option. Similarly, in systems where there is fairly high gene tree-sepecies tree concordance, the distribution of weights may be restricted to a fairly small section of the ternary plot, so `superfine` may be more appropriate. 
 
-
-1) Download twisstntern.py into your working directory; this should also include your input file of topology weights
-2) Load python
-3) Import the package
-```bash
-Import twisstntern
-```
-4) Execute the code
-```bash
-res=twisstntern.run_analysis(inputfile.csv, granularity)
-```
-Replace `inputfile.csv` is the name of your input file of topology weights. Only .csv format it supported. 
-`granularity` determines the number of subtriangles used in the local symmetry analysis. We provided 3 preset options `coarse`, `fine`, and `superfine`. 
-
-The most appropriate granuliaty for your will depend on the number of genomic regions analysed and the dispersion of the data aross the ternary plot. For most WGS studies where the genome has been section into block or arbitrarty size or SNP number, the `fine` option is a good place to start. Emerging tools like the ARG can produce very large numbers of marginal trees, so the `superfine` options may be suitable. Those with reduced representation datasets may have fewer loci than the average WGS study, so may opt for the coarse option. Similarly, in systems where there is fairly high gene tree-sepecies tree concordance, the dsitribution may be restricted to a fairly small section of the triangle so a higher granularity may provide better resolution. 
-
 ## Input file
-The input file is a .csv file consisting of three columns of topology counts with arbitrary headers. This is produced by Twisst. The ctirical thing for the twisst analysis is that the weights for the species tree toplogy (or topology matches the genome-wide tree or inffered demographic history) should be in column 1; the other 2 columns represent the 2 alternative subtrees. It does not matter which alternative topology goes in which column, and this can be changed to switch these between the left and right sides of the ternary plot. 
+The input file is a .csv file consisting of three columns of counts of each tolpology. This is produced by Twisst. The headers can be any arbitrary name. The ctirical thing for the twisst analysis is that the weights for the species tree toplogy (or topology matches the genome-wide tree or inffered demographic history) should be in column 1; the other 2 columns represent the 2 alternative subtrees. It does not matter which alternative topology goes in which column, and this can be changed to switch these between the left and right sides of the ternary plot. 
 
 ```
 topo1,topo2,topo3
