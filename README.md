@@ -20,7 +20,7 @@ At present, TwisstNTern must be exectud within a Jupyter notebook. If you do not
 Assuming that you already know how to execute a Jupyter notebook, you can follow the following steps.
 
 1) Download the TwisstNTern repository, and move your input file into the directory
-2) Open the jupyter notebook `twisstntern_user_interface.ipynb`. Do not modify any other file in the directory. <img src="step3.1.png" height="" align="bottom"> 
+2) Open the jupyter notebook `twisstntern_user_interface.ipynb`. Do not modify any other file in the directory. <img src="" height="" align="bottom"> 
 3) In cell 2, change `file` so it matches the name of your input file, and set `granularity` to the desired resolution (see Granularity section below). `granularity` determines the number of subtriangles used in the local symmetry analysis. We provided 3 preset options `coarse`, `fine`, and `superfine`. See below for more information. 
 4) Press the double arrow button to restart the kernal and run all cells.
 5) The results will be written to a folder called `results` in your local directory (See Output section below)
