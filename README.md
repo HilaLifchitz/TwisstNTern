@@ -35,7 +35,7 @@ Replace `inputfile.csv` is the name of your input file of topology weights. Only
 The most appropriate granuliaty for your will depend on the number of genomic regions analysed and the dispersion of the data aross the ternary plot. For most WGS studies where the genome has been section into block or arbitrarty size or SNP number, the `fine` option is a good place to start. Emerging tools like the ARG can produce very large numbers of marginal trees, so the `superfine` options may be suitable. Those with reduced representation datasets may have fewer loci than the average WGS study, so may opt for the coarse option. Similarly, in systems where there is fairly high gene tree-sepecies tree concordance, the dsitribution may be restricted to a fairly small section of the triangle so a higher granularity may provide better resolution. 
 
 ## Input file
-The input file is a .csv file consisting of three columns with arbitrary headers. This is produced by Twisst. The ctirical thing for the twisst analysis is that the weights for the species tree toplogy (or topology matches the demographic history) should be in column 1; the other 2 columns represent the 2 alternative subtrees. It does not matter which alternative topology goes in which column, and this can be changed to switch these between the left and right sides of thr ternary plot. 
+The input file is a .csv file consisting of three columns of topology counts with arbitrary headers. This is produced by Twisst. The ctirical thing for the twisst analysis is that the weights for the species tree toplogy (or topology matches the genome-wide tree or inffered demographic history) should be in column 1; the other 2 columns represent the 2 alternative subtrees. It does not matter which alternative topology goes in which column, and this can be changed to switch these between the left and right sides of the ternary plot. 
 
 ```
 topo1,topo2,topo3
@@ -48,7 +48,6 @@ topo1,topo2,topo3
 3592,2192,4216
 700,740,8560
 3936,2568,3496
-...
 3936,2568,3496
 ```
 
