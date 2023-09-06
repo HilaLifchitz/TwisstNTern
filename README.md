@@ -25,7 +25,6 @@ Assuming that you already know how to execute a Jupyter notebook, you can follow
 4) Press the double arrow button to restart the kernal and run all cells.
 5) The results will be written to a folder called `results` in your local directory (See Output section below)
 
-
 ## Choosing the most appropriate granularity
 The most appropriate granuliaty for your dataset will depend on the number of genomic regions analysed and the dispersion of the data aross the ternary plot. For most WGS studies where the genome has been sectioned into block of arbitrarty size or SNP number, the `fine` option is a good place to start. Emerging tools like the ARG can produce very large numbers of marginal trees, so the `superfine` options may be suitable. Studies with reduced representation datasets may have fewer loci than the average WGS study, so `coarse` may be a more apporpriate option. Similarly, in systems where there is fairly high gene tree-sepecies tree concordance, the distribution of weights may be restricted to a fairly small section of the ternary plot, so `superfine` may be more appropriate.
 
