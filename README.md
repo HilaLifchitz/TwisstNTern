@@ -21,7 +21,7 @@ Assuming that you already know how to execute a Jupyter notebook, you can follow
 
 1) Download the TwisstNTern repository, and move your input file into the directory
 2) Open the jupyter notebook `twisstntern_user_interface.ipynb`
-3) In cell 2, change the file name so it matches the name of your input file, and set the granularity to the desired resolution (see Granularity section below).
+3) In cell 2, change `file` so it matches the name of your input file, and set `granularity` to the desired resolution (see Granularity section below). `granularity` determines the number of subtriangles used in the local symmetry analysis. We provided 3 preset options `coarse`, `fine`, and `superfine`. See below for more information. 
 <img src="step3.png" height="" align="bottom">
 
 
