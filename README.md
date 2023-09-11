@@ -44,6 +44,12 @@ topo1,topo2,topo3
 3936,2568,3496
 3936,2568,3496
 ```
-## Output
+## Output 
+The program will generate a Results file comprising the following components:
 
+1. CSV Results Table: This file will contain the results in CSV format.
+2. Subtriangles Index Plot: An index plot with distinct numbers assigned to each subtriangle for clear visualization. These numbers correspond to the indices in the result file.
+3. Ternary Coordinates Plot: A plot of the data in ternary coordinates.
+4. Results Summary Plot: A plot displaying the results with D_lr results together with significant G-test scoring.
+5. Basic Asymmetry Plot: A plot showcasing the basic asymmetry between the left and right halves of the triangle.
 
