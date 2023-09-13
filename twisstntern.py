@@ -1000,7 +1000,7 @@ def dump_data(file):
 
 # # User Interface
 
-# In[18]:
+# In[19]:
 
 
 # The main function- runs the anlysis
@@ -1053,6 +1053,14 @@ def run_analysis(file,granuality):
         
     # turning the coordinate trinagle plotting index to the actual index of the dataframe
     result.set_index("index", inplace=True)
+    
+    # adding a row with the information for the fundemental asymmetry
+    (main_n_r, main_n_l, main_d_lr,main_g_test, main_p_value)=fundemental_asymmetry(data)
+    #fundemental_triangles_row = {'coord. (T1, T2, T3)': 'NA', 'n_right': main_n_r, 'n_left': main_n_l,
+    #                     'D-LR':main_d_lr, 'g-test':main_g_test, 'p-value(g-test)': main_p_value}
+    #result =  result.append(pd.DataFrame([fundemental_triangles_row],index=['full dataset' ],columns=result.columns))
+    result.loc['full dataset'] = ['NA',main_n_r,main_n_l,main_d_lr,main_g_test,main_p_value]
+    
     result =result.iloc[::-1] # reversing order so the first row is index 1...
     
     # saving as csv
@@ -1063,7 +1071,7 @@ def run_analysis(file,granuality):
     return result
 
 
-# In[19]:
+# In[20]:
 
 
 # Conducts an initial assessment of basic asymmetry between the two primary subtriangles, divided by the y-axis.
@@ -1090,6 +1098,20 @@ def run_basic_analysis(file):
     print("\ng-test =", main_g_test)
     print("\ng-test- p value=", main_p_value)
     return (main_n_r, main_n_l, main_d_lr,main_g_test, main_p_value)
+
+
+# In[21]:
+
+
+file = "N3.5_output.weights_corrected.csv"
+granuality = "coarse"
+res= run_analysis(file,granuality)
+
+
+# In[22]:
+
+
+res
 
 
 # In[ ]:
