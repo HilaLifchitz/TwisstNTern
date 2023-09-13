@@ -13,9 +13,6 @@ The three corners of the ternary plot, [1,0,0], [0,1,0], [0,0,1], correspond wit
 
 In an idealized four population model (3 splits with no migration), we expect the distribution of weights for many loci to be biased toward the top of the triangle which represents the subtree that matches the demographic history. Incomplete lineage sorting will generate a symmetrical distribution of weights between the left and right sides of the plot. This is because there is an equal chance that any discordant gene tree will more-closely resemble either alternative topology. However, processes like gene flow result in an asymmetrical pattern of discordance between the left and right halves of the triangle. The strength of the genealogical asymmetry (and its significance) can be quantified using the Dlr statistic, which is similar to the site-based statistic, Patterson’s D. Dlr can be calculated at the genome-wide scale (two full half-triangles), or between left-right sub-triangles so that one can see how the strength of the asymmetry varies among loci that show different levels of discordance. 
 
-![image](https://github.com/HilaLifchitz/TwisstNTern/assets/19752114/4bdf0720-658f-4aa8-8e92-9f5f5e4c5dd5)
-
-
 <img src="method_overview.png" height="450pt" align="bottom">
 
 
