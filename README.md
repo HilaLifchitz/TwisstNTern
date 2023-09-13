@@ -5,6 +5,17 @@
 TwisstNTern is an analytical framework for visualising and analysing topology weights in a ternary plot. Please note that TwisstNTern does not calculate topology weights; These must be calculated beforehand using the program Twisst (Martin & Van Belleghem 2017 https://doi.org/10.1534/genetics.116.194720): https://github.com/simonhmartin/twisst
 
 ## What does TwisstNTern do?
+In a tree with four populations, there are only 3 possible unrooted subtrees that can be observed for each sampled subtree. This makes a ternary plot a natural framework for analyzing the joint distribution of weights, as it is possible to graphically represent of each genomic window as a single point based on the three topology weights.
+
+
+The three corners of the ternary plot, [1,0,0], [0,1,0], [0,0,1], correspond with genomic windows that show taxon-level relationships that are consistent with one of the three possible subtrees; that is, 100% of the sampled subtrees (in our case 10,000) perfectly match one of the three alternative trees, implying that samples from each of the four groups are monophyletic (Fig. 2A). In contrast, the very center of the ternary plot—[0.33,0.33,0,33]—corresponds with a genomic window where all three of the possible subtrees were sampled at equal frequency. Any other location in the ternary plot indicates a bias toward one of the subtrees, but with some resemblance to at least one of the other alternative topologies.
+
+
+In an idealized four population model (3 splits with no migration), we expect the distribution of weights for many loci to be biased toward the top of the triangle which represents the subtree that matches the demographic history. Incomplete lineage sorting will generate a symmetrical distribution of weights between the left and right sides of the plot. This is because there is an equal chance that any discordant gene tree will more-closely resemble either alternative topology. However, processes like gene flow result in an asymmetrical pattern of discordance between the left and right halves of the triangle. The strength of the genealogical asymmetry (and its significance) can be quantified using the Dlr statistic, which is similar to the site-based statistic, Patterson’s D. Dlr can be calculated at the genome-wide scale (two full half-triangles), or between left-right sub-triangles so that one can see how the strength of the asymmetry varies among loci that show different levels of discordance. 
+
+![image](https://github.com/HilaLifchitz/TwisstNTern/assets/19752114/4bdf0720-658f-4aa8-8e92-9f5f5e4c5dd5)
+
+
 <img src="method_overview.png" height="450pt" align="bottom">
 
 
@@ -46,10 +57,9 @@ topo1,topo2,topo3
 ```
 ## Output 
 The program will generate a Results file comprising the following components:
-
-1. CSV Results Table: This file will contain the results in CSV format.
-2. Subtriangles Index Plot: An index plot with distinct numbers assigned to each subtriangle for clear visualization. These numbers correspond to the indices in the result file.
-3. Ternary Coordinates Plot: A plot of the data in ternary coordinates.
+1. CSV Results Table: This file contains the results of the analysis in CSV format. 
 4. Results Summary Plot: A plot displaying the results with D_lr results together with significant G-test scoring.
-5. Basic Asymmetry Plot: A plot showcasing the basic asymmetry between the left and right halves of the triangle.
+5. Genome-wide asymmetry Plot: A plot showcasing the asymmetry between the left and right halves of the full triangle.
+n. Subtriangles Index Plot: An index plot with distinct numbers assigned to each subtriangle for clear visualization. These numbers correspond to the indices in the results file.
+3. Ternary Coordinates Plot: A plot of the data in ternary coordinates.
 
