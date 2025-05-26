@@ -1,10 +1,13 @@
+> 💡 **Note for developers**  
+> This is the draft for documentation and how command line implementation should look like (feel free to add/suggest more)
+> All functions needs for command line implementation are provided in jupiter notebook, along this some testing.
+
+
 # Running `twisstntern_simulate`
 
 ## Why simulate data?
 The `twisstntern` module enables the implementation of a wide range of neutral demographic simulations. Simulating data allows researchers to explore how different demographic scenarios—such as population divergence, migration, and changes in population size—affect the distribution of genealogical topologies. These simulated patterns can be visualized using ternary plots, helping to build intuition about expected signals under neutrality and to compare against empirical genomic data.
 
-> 💡 **Note for developers**  
-> THis should summarize options we want to include, please add
 
 ## Usage
 
